@@ -1,0 +1,31 @@
+name: GitHub Actions for API Testing gorest.co.in/public/v2
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  config_env:
+    name: Config Env and Checkout Code
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Java Environment
+      uses: actions/setup-java@v2
+      with:
+        distribution: temurin
+        java-version: 17
+        cache: maven
+
+    - name: Check out repository code
+      uses: actions/checkout@v2
+
+    - name: Cache the Maven packages to speed up build
+      uses: actions/cache@v1
+      with:
+        path: ~/.m2
+        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+        restore-keys: ${{ runner.os }}-m2
+
+    - name: Run CheckStyle Code
+      run: mvn checkstyle:check
+      continue-on-error: true
