@@ -9,6 +9,9 @@ jobs:
     name: Config Env and Checkout Code
     runs-on: ubuntu-latest
     steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+      
     - name: Setup Java Environment
       uses: actions/setup-java@v2
       with:
