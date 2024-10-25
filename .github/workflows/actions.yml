@@ -21,14 +21,7 @@ jobs:
 
     - name: Check out repository code
       uses: actions/checkout@v2
-
-    - name: Cache the Maven packages to speed up build
-      uses: actions/cache@v1
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
-
+                
     - name: Run CheckStyle Code
       run: mvn checkstyle:check
       continue-on-error: true
