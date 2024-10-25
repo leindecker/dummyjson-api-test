@@ -33,3 +33,7 @@ jobs:
     - name: Run CheckStyle Code
       run: mvn checkstyle:check
       continue-on-error: true
+
+    - name: Execute tests with Maven
+      run: mvn test
+      continue-on-error: true   
